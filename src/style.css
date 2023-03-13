@@ -20,7 +20,7 @@ body {
     main {
         display: grid;
         grid-template-columns: 50% 50%;
-        padding: 6rem;
+        padding: 2rem 10rem;
     }
 
     footer {
