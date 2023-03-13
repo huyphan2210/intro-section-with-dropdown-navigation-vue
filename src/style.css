@@ -6,3 +6,28 @@
     --almost-black: hsl(0, 0%, 8%);
 }
 
+body {
+    background-color: var(--almost-white);
+    font-family: Epilogue, sans-serif;
+}
+
+    header {
+        display: grid;
+        grid-template-columns: 10% 90%;
+        padding: 1rem 2rem;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        padding: 6rem;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 1vh;
+        left: 50%;
+        transform: translate(-50%);
+        white-space: nowrap;
+        font-size: 0.8rem;
+    }
