@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 
 const isMenuOpen = ref(false);
-
+const isFeaturesOpen = ref(false);
 </script>
 
 <template>
@@ -13,10 +13,28 @@ const isMenuOpen = ref(false);
         <img @click="isMenuOpen = false" id="cross" src="./assets/images/icon-close-menu.svg" alt="Close Icon">
         <div class="navigations">
           <nav>
-            <a class="dropdown">
+            <a class="dropdown" @click="isFeaturesOpen = !isFeaturesOpen">
                 Features 
                 <img src="./assets/images/icon-arrow-down.svg" alt="arrow">
             </a>
+            <div class="options" :style="isFeaturesOpen ? 'visibility: visible;' : ''">
+                    <div class="option">
+                        <img src="./assets/images/icon-todo.svg" alt="Todo">
+                        <span>Todo list</span>
+                    </div>
+                    <div class="option">
+                        <img src="./assets/images/icon-calendar.svg" alt="Calendar">
+                        <span>Calendar</span>
+                    </div>
+                    <div class="option">
+                        <img src="./assets/images/icon-reminders.svg" alt="Reminders">
+                        <span>Reminders</span>
+                    </div>
+                    <div class="option">
+                        <img src="./assets/images/icon-planning.svg" alt="Planning">
+                        <span>Planning</span>
+                    </div>
+                </div>
             <a class="dropdown">
                 Company 
                 <img src="./assets/images/icon-arrow-down.svg" alt="arrow">
@@ -54,8 +72,10 @@ const isMenuOpen = ref(false);
     #cross {
         display: none;
     }
-    .navigations a {
+    .navigations nav {
         position: relative;
+    }
+    .navigations a {
         margin-left: 1rem;
         margin-right: 1rem;
         color: var(--medium-gray);
@@ -65,6 +85,39 @@ const isMenuOpen = ref(false);
             cursor: pointer;
             color: var(--almost-black);
         }
+            .navigations a:hover .options {
+                color: var(--medium-gray);
+            }
+        .options {
+            visibility: hidden;
+            position: absolute;
+            padding: 1rem;
+            left: 0;
+            top: 150%;
+            border-radius: 0.5rem;
+            box-shadow: 0.25rem 0.25rem 0.5rem #888;
+            z-index: 3;
+        }
+            .option {
+                display: grid;
+                grid-template-columns: 30% 70%;
+                font-weight: 400;
+                margin-block-end: 0.5rem;
+            }
+                .option:hover {
+                    cursor: pointer;
+                }
+                .option:last-child {
+                    margin-block-end: 0;
+                }
+                .option img {
+                    position: static !important;
+                    transform: none !important;
+                }
+                .option span {
+                    font-size: 0.8rem;
+                    align-self: center;
+                }
     .navigations a img {
         position: absolute;
         top: 50%;
