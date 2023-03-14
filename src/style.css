@@ -26,8 +26,28 @@ body {
     footer {
         position: fixed;
         bottom: 1vh;
-        left: 50%;
-        transform: translate(-50%);
+        width: 100%;
+        text-align: center;
         white-space: nowrap;
         font-size: 0.8rem;
+        left: 0;
     }
+
+@media screen and (max-aspect-ratio: 1) {
+    header {
+        width: 100vw;
+        display: flex;
+        justify-content: space-between;
+        background-color: var(--almost-white);
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 0;
+    }
+    main {
+        margin-block: 4rem;
+        display: flex;
+        flex-direction: column-reverse;
+        padding: 0;
+    }
+}
