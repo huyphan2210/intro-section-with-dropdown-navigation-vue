@@ -1,19 +1,25 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
+const isMenuOpen = ref(false);
 
 </script>
 
 <template>
-    <img id="logo" src="./assets/images/logo.svg" alt="logo">
-    <div class="headerSection">
+    <img id="logo" src="./assets/images/logo.svg" alt="Logo">
+    <img @click="isMenuOpen = true" id="menu" src="./assets/images/icon-menu.svg" alt="Menu">
+    <div @click="isMenuOpen = false" id="overlay" :style="isMenuOpen ? 'visibility: visible;' : ''"></div>
+    <div class="headerSection" :style="isMenuOpen ? 'transform: translate(-100%)' : ''">
+        <img @click="isMenuOpen = false" id="cross" src="./assets/images/icon-close-menu.svg" alt="Close Icon">
         <div class="navigations">
           <nav>
             <a class="dropdown">
-                Features
-                <img src="./assets/images/icon-arrow-down.svg">
+                Features 
+                <img src="./assets/images/icon-arrow-down.svg" alt="arrow">
             </a>
             <a class="dropdown">
-                Company
-                <img src="./assets/images/icon-arrow-down.svg">
+                Company 
+                <img src="./assets/images/icon-arrow-down.svg" alt="arrow">
             </a>
             <a>Careers</a>
             <a>About</a>
@@ -30,11 +36,24 @@
 #logo {
     padding: 1rem;
 }
+#menu {
+    display: none;
+}
+#overlay {
+    position: fixed;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 .headerSection {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+    #cross {
+        display: none;
+    }
     .navigations a {
         position: relative;
         margin-left: 1rem;
@@ -75,4 +94,46 @@
         .auth button:last-child:hover {
             border-color: var(--almost-black);
         }
+
+@media screen and (max-aspect-ratio: 1) {
+    #menu {
+        display: block;
+        height: 100%;
+        padding: 1rem;
+    }
+    .headerSection {
+        position: fixed;
+        flex-direction: column;
+        background-color: var(--almost-white);
+        width: 50vw;
+        height: 100vh;
+        left: 100%;
+        transition: 1s;
+        z-index: 1;
+        align-items: normal;
+        padding: 2rem;
+        justify-content: start;
+    }
+        #cross {
+            display: block;
+            position: absolute;
+            right: 2rem;
+            justify-self: end;
+        }
+        .navigations nav {
+            display: flex;
+            flex-direction: column;
+            margin-block-start: 15vh;
+        }
+            .navigations nav a{
+                margin-left: 0;
+                margin-bottom: 2rem;
+            }
+                .navigations nav a img {
+                    margin-left: 0.5rem;
+                }
+        .auth button {
+            width: 100%;
+        }
+}
 </style>
