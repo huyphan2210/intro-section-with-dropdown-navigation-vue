@@ -26,7 +26,6 @@
 <style scoped>
 .heroSection {
   position: relative;
-  z-index: -1;
 }
   .heroSection h1 {
     font-size: 5rem;
