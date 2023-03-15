@@ -3,6 +3,15 @@ import { ref } from 'vue';
 
 const isMenuOpen = ref(false);
 const isFeaturesOpen = ref(false);
+const isCompanyOpen = ref(false);
+
+const featureFocus = () => {
+    isFeaturesOpen.value = false
+}
+
+const companyFocus = () => {
+    isCompanyOpen.value = false
+}
 </script>
 
 <template>
@@ -13,11 +22,11 @@ const isFeaturesOpen = ref(false);
         <img @click="isMenuOpen = false" id="cross" src="./assets/images/icon-close-menu.svg" alt="Close Icon">
         <div class="navigations">
           <nav>
-            <a class="dropdown" @click="isFeaturesOpen = !isFeaturesOpen">
+            <a class="dropdown" @click="isFeaturesOpen = !isFeaturesOpen" :style="isFeaturesOpen ? 'margin-bottom: 0;' : ''">
                 Features 
                 <img src="./assets/images/icon-arrow-down.svg" alt="arrow">
             </a>
-            <div class="options" :style="isFeaturesOpen ? 'visibility: visible;' : ''">
+            <div class="options" @focusout="featureFocus" :tabindex="isFeaturesOpen ? 1 : 0" :style="isFeaturesOpen ? 'display: block;' : ''">
                     <div class="option">
                         <img src="./assets/images/icon-todo.svg" alt="Todo">
                         <span>Todo list</span>
@@ -35,10 +44,21 @@ const isFeaturesOpen = ref(false);
                         <span>Planning</span>
                     </div>
                 </div>
-            <a class="dropdown">
+            <a class="dropdown" @click="isCompanyOpen = !isCompanyOpen" :style="isCompanyOpen ? 'margin-bottom: 0;' : ''">
                 Company 
                 <img src="./assets/images/icon-arrow-down.svg" alt="arrow">
             </a>
+            <div class="optionsCompany" @focusout="companyFocus" :tabindex="isCompanyOpen ? 1 : 0" :style="isCompanyOpen ? 'display: block;' : ''">
+                    <div class="option">
+                        <span>History</span>
+                    </div>
+                    <div class="option">
+                        <span>Our Team</span>
+                    </div>
+                    <div class="option">
+                        <span>Blog</span>
+                    </div>
+                </div>
             <a>Careers</a>
             <a>About</a>
           </nav>
@@ -88,15 +108,18 @@ const isFeaturesOpen = ref(false);
             .navigations a:hover .options {
                 color: var(--medium-gray);
             }
-        .options {
-            visibility: hidden;
+        .options, .optionsCompany {
+            display: none;
             position: absolute;
             padding: 1rem;
-            left: 0;
+            left: -1rem;
             top: 150%;
             border-radius: 0.5rem;
             box-shadow: 0.25rem 0.25rem 0.5rem #888;
             z-index: 3;
+        }
+        .optionsCompany {
+            left: 7rem;
         }
             .option {
                 display: grid;
@@ -117,7 +140,12 @@ const isFeaturesOpen = ref(false);
                 .option span {
                     font-size: 0.8rem;
                     align-self: center;
+                    color: var(--medium-gray);
+                    font-weight: 700;
                 }
+            .optionsCompany .option {
+                display: block;
+            }
     .navigations a img {
         position: absolute;
         top: 50%;
@@ -184,6 +212,19 @@ const isFeaturesOpen = ref(false);
             }
                 .navigations nav a img {
                     margin-left: 0.5rem;
+                    position: static;
+                }
+            .options, .optionsCompany {
+                position: static;
+                margin-block-end: 2rem;
+                padding: 1rem 1rem 0 1rem;
+                box-shadow: none;
+            }
+                .option {
+                    grid-template-columns: 20% 80%;
+                }
+                .option span {
+                    font-size: 1rem;
                 }
         .auth button {
             width: 100%;
