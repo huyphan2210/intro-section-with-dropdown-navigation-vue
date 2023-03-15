@@ -100,6 +100,7 @@
   }
   .heroSection {
     text-align: center;
+    z-index: -1;
   }
     .heroSection h1 {
       font-size: 2rem;
